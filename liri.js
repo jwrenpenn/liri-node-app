@@ -90,9 +90,8 @@ function spotifyThisSong(song) {
 }
 
 function movieThis(movie) {
-	// Search for movie
-	    request('http://www.omdbapi.com/?t='+movie+'&y=&plot=short&tomatoes=true&r=json', function (error, response, body) {
-        // Display song details and show error if there is an error
+	    request('http://www.omdbapi.com/?t='+movie+'&y=&plot=short&tomatoes=true&r=json&apikey=d3d21e0c', function (error, response, body) {
+
         if (!error && response.statusCode == 200) {
         	body = JSON.parse(body);
             console.log('Movie Title: ' + body.Title);
@@ -103,23 +102,19 @@ function movieThis(movie) {
             console.log('Plot: ' + body.Plot);
             console.log('Actors: ' + body.Actors);
             console.log('Rotten Tomatoes Rating: ' + body.tomatoUserRating);
-            console.log('Rotten Tomatoes URL: ' + body.tomatoURL);
         } else {
             console.log('Error occurred: ' + error);
         }
     });
 }
 
-// Function to process the Liri do what it says in the random file and run the correct Liri Command
 
 function doWhatItSays() {
-            fs.readFile(liriData, "utf8", function(error,response){
-                // split the info on the file at the comma
+            fs.readFile(liriData, "random.txt", function(error,response){
+                
                 var liriArgs = response.split(',');
-                // create new variables with the array data
                 var liriCommand = liriArgs[0];
                 var liriData = liriArgs[1];
-                // run the main function again with the data from the file.
                 liri(liriCommand,liriData);
             });
 }
