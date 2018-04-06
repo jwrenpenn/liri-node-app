@@ -110,7 +110,7 @@ function movieThis(movie) {
 
 
 function doWhatItSays() {
-            fs.readFile(liriData, "random.txt", function(error,response){
+            fs.readFile("random.txt", "utf8", function(error,response){
                 
                 var liriArgs = response.split(',');
                 var liriCommand = liriArgs[0];
